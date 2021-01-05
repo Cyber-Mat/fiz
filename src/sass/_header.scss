@@ -1,0 +1,39 @@
+.header {
+  display: grid;
+  grid-template-columns: 60% 10% 30%;
+  justify-items: center;
+  align-items: center;
+
+  padding: 0 2rem;
+
+  background-color: $color-grey-light2;
+
+  &__search {
+    width: 100%;
+
+    input {
+      width: 100%;
+      height: 4rem;
+      border: none;
+      background-color: transparent;
+
+      &:active,
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__notif {
+  }
+
+  &__user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--menu {
+      margin-left: 1rem;
+    }
+  }
+}
