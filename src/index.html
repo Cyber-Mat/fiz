@@ -10,36 +10,46 @@
       rel="stylesheet"
     />
   </head>
-  <body class="container">
-    <header class="header">
-      <div class="header__search">
-        <input type="text" name="search" id="search" placeholder="Search" />
-        <!-- <label for="search">
-          <svg class="icon">
-            <use xlink:href="./img/sprite.svg#icon-search"></use>
-          </svg>
-        </label> -->
-      </div>
-      <div class="header__notif">
-        <svg class="icon">
-          <use xlink:href="./img/sprite.svg#icon-notifications-outline"></use>
-        </svg>
-      </div>
-      <div class="header__user">
-        <figure class="header__user--img"></figure>
-        <figcaption class="header__user--name">Steve Kwatcho</figcaption>
-        <div class="header__user--menu">
-          <svg class="icon">
-            <use xlink:href="./img/sprite.svg#icon-cheveron-down"></use>
-          </svg>
-          <!-- <div class="logout">LOGOUT</div> -->
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header__search">
+          <label for="search">
+            <svg class="icon search-icon">
+              <use xlink:href="./img/sprite.svg#icon-search"></use>
+            </svg>
+          </label>
+
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+          />
         </div>
-      </div>
-    </header>
-    <nav class="sidebar"></nav>
-    <main class="main">
-      <section class="list"></section>
-      <section class="detail"></section>
-    </main>
+        <div class="header__notif">
+          <svg class="icon notif-icon">
+            <use xlink:href="./img/sprite.svg#icon-notifications-outline"></use>
+          </svg>
+        </div>
+        <div class="header__user">
+          <figure class="header__user--img">
+            <img src="./img/user.jpg" alt="user image" class="image" />
+          </figure>
+          <figcaption class="header__user--name">Steve Kwatcho</figcaption>
+          <div class="header__user--menu">
+            <svg class="icon">
+              <use xlink:href="./img/sprite.svg#icon-cheveron-down"></use>
+            </svg>
+            <!-- <div class="logout">LOGOUT</div> -->
+          </div>
+        </div>
+      </header>
+      <nav class="sidebar"></nav>
+      <main class="main">
+        <section class="list"></section>
+        <section class="detail"></section>
+      </main>
+    </div>
   </body>
 </html>

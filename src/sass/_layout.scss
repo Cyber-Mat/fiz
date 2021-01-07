@@ -1,9 +1,23 @@
+body {
+  min-height: 100vh;
+}
 .container {
   display: grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 4rem 1fr;
-  // max-width: 120rem;
-  height: 100vh;
+
+  max-width: 120rem;
+  min-height: 50rem;
+
+  margin: 8rem auto;
+  background-color: #fff;
+  box-shadow: $shadow;
+
+  // @media only screen and (max-width: $bp-largest) {
+  //   margin: 0;
+  //   max-width: 100%;
+  //   width: 100%;
+  // }
 }
 
 .main {
@@ -14,7 +28,7 @@
 
 .header {
   grid-row: 1/2;
-  grid-column: 1/-1;
+  grid-column: 2/-1;
   height: 100%;
   width: 100%;
 }
