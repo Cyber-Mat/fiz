@@ -1,0 +1,55 @@
+.sidebar {
+  padding: 1rem 2rem;
+  border-right: $outline;
+
+  display: grid;
+  grid-template-rows: 10% 50% 40%;
+  grid-row-gap: 4rem;
+
+  &__nav {
+    display: grid;
+    grid-template-rows: repeat(5, min-content);
+    grid-row-gap: 2rem;
+
+    .icon {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    & > div {
+      display: grid;
+      grid-template-columns: 10% 90%;
+      grid-column-gap: 1.5rem;
+      align-items: center;
+
+      text-transform: capitalize;
+    }
+  }
+  &__overview {
+    .icon {
+      fill: $color-secondary-1;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  &__today {
+    .icon {
+      fill: $color-secondary-2;
+    }
+  }
+  &__important {
+    .icon {
+      fill: $color-secondary-3;
+    }
+  }
+  &__scheduled {
+    .icon {
+      fill: $color-secondary-4;
+    }
+  }
+  &__done {
+    .icon {
+      fill: $color-secondary-5;
+    }
+  }
+}
