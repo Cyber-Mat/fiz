@@ -1,7 +1,105 @@
 .detail {
   display: grid;
   grid-template-columns: 4rem 1fr;
-  grid-column-gap: 2rem;
+  grid-column-gap: 1rem;
 
   padding: 1rem;
+  padding-top: 3rem;
+  padding-right: 3rem;
+
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+
+    border-radius: 100%;
+    border: $outline-light;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-secondary-6;
+
+    .icon {
+      fill: #fff;
+      // opacity: 1;
+      // visibility: hidden;
+
+      transition: all 0.5s;
+    }
+  }
+  &__content {
+  }
+  &__header {
+    display: grid;
+    grid-template-rows: repeat(2, 50%);
+    grid-row-gap: 0.5rem;
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-items: center;
+
+      font-size: 1.4rem;
+      font-weight: 700;
+
+      .icon-div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 1rem;
+
+        .icon {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+    }
+
+    .bottom {
+      display: grid;
+      grid-template-columns: 10rem 20rem;
+      font-size: 1rem;
+
+      & > div {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          margin-right: 0.5rem;
+          height: 1.2rem;
+          width: 1.2rem;
+        }
+      }
+
+      .date {
+        margin-right: -10rem;
+      }
+    }
+  }
+  &__text {
+    padding-top: 2rem;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+  }
+
+  &__step {
+    padding-top: 2rem;
+
+    &--add {
+      display: block;
+      margin-bottom: 1rem;
+
+      color: $color-secondary-1;
+
+      cursor: pointer;
+    }
+
+    &--item {
+      margin-bottom: 0.5rem;
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      grid-column-gap: 1rem;
+      align-items: center;
+    }
+  }
 }

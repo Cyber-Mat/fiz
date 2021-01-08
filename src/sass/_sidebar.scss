@@ -3,7 +3,7 @@
   border-right: $outline;
 
   display: grid;
-  grid-template-rows: 10% 50% 40%;
+  grid-template-rows: 10% min-content 1fr min-content;
   grid-row-gap: 4rem;
 
   &__nav {
@@ -52,4 +52,85 @@
       fill: $color-secondary-5;
     }
   }
+
+  &__tag {
+    display: flex;
+    flex-direction: column;
+
+    &--item {
+      display: grid;
+      grid-template-columns: min-content 1fr min-content;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 1rem;
+
+      .tag {
+        &-color {
+          height: 1rem;
+          width: 1rem;
+          border-radius: 2px;
+          margin-right: 2rem;
+        }
+
+        &-count {
+          position: relative;
+          color: #fff;
+          z-index: 10000;
+          font-size: 1rem;
+
+          &::after {
+            display: block;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(30%, -5%);
+
+            z-index: -1;
+
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 100%;
+
+            background-color: $color-secondary-4;
+          }
+        }
+      }
+    }
+  }
+
+  &__add {
+    justify-self: center;
+    margin-top: -6rem;
+
+    height: 4rem;
+    width: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $color-primary;
+    border-radius: 100%;
+
+    box-shadow: $shadow-light;
+
+    &-btn {
+      .icon {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.blue {
+  background-color: $color-secondary-1;
+}
+
+.yellow {
+  background-color: $color-secondary-2;
+}
+.red {
+  background-color: $color-secondary-3;
 }
