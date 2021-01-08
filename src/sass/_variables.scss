@@ -5,8 +5,10 @@ $color-secondary-2: rgba(106, 176, 76, 1);
 $color-secondary-3: rgba(245, 59, 87, 1);
 $color-secondary-4: rgba(30, 39, 46, 1);
 $color-secondary-5: rgba(190, 46, 221, 1);
+$color-secondary-6: rgba(39, 174, 96, 1);
 
-$color-grey-light-1: #b4c4ce38;
+// $color-grey-light-1: rgba(180, 196, 206, 0.22);
+$color-grey-light-1: rgba(180, 196, 206, 0.1);
 $color-grey-light-2: rgba(97, 116, 141, 1);
 $color-grey-dark: rgba(32, 33, 36, 1);
 
@@ -14,12 +16,15 @@ $color-blue2: rgba(0, 151, 230, 1);
 $color-blue3: rgba(0, 168, 255, 1);
 
 //FONTS
-$font-primary: 'font-family: ' Lato ', sans-serif;';
+$font-primary: ' Lato ', sans-serif;
 
 //OUTLINES
 $outline: 1.5px rgb(190, 190, 190) solid;
+$outline-light: 1.5px rgba(190, 190, 190, 0.3) solid;
+$outline-light-2: 1px rgba($color-secondary-6, 1) solid;
 
 $shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+$shadow-light: 0 0.5rem 1rem rgba(#333, 0.1);
 
 //#5f6368
 //#202124
