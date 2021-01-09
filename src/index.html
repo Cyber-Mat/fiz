@@ -98,7 +98,7 @@
         </div>
 
         <div class="sidebar__add">
-          <svg class="icon">
+          <svg class="icon sidebar__add-btn">
             <use xlink:href="./img/sprite.svg#icon-plus"></use>
           </svg>
         </div>
@@ -355,22 +355,39 @@
 
       <div class="popup">&nbsp;</div>
       <form class="form">
-        <input class="form__input" type="text" name="task" id="task" />
         <label class="form__label" for="task">Task</label>
-
         <input
           class="form__input"
           type="text"
+          name="task"
+          id="task"
+          placeholder="Enter task name"
+        />
+
+        <label class="form__label" for="deadline">Due date</label>
+        <input class="form__input" type="date" name="deadline" id="deadline" />
+
+        <label class="form__label" for="description">Description</label>
+        <textarea
+          class="form__input form__desc"
+          type="textarea"
           name="description"
           id="description"
-        />
-        <label class="form__label" for="description">Description</label>
+        >
+        </textarea>
 
-        <input class="form__input" type="text" name="deadline" id="deadline" />
-        <label class="form__label" for="deadline">Due date</label>
-
-        <input class="form__input" type="text" name="tag" id="tag" />
         <label class="form__label" for="tag">Tag</label>
+        <input
+          class="form__input"
+          type="text"
+          name="tag"
+          id="tag"
+          placeholder="Enter task tag"
+        />
+
+        <input class="submit-btn" type="submit" value="Add task" />
+
+        <div class="close-popup">X</div>
       </form>
     </div>
   </body>
