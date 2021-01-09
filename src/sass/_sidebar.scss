@@ -76,7 +76,7 @@
         &-count {
           position: relative;
           color: #fff;
-          z-index: 10000;
+          z-index: 100;
           font-size: 1rem;
 
           &::after {
@@ -133,4 +133,44 @@
 }
 .red {
   background-color: $color-secondary-3;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+
+  overflow: hidden;
+  // max-width: 90rem;
+  // min-height: 50rem;
+  background-size: cover;
+
+  &__input {
+    background-color: $color-primary;
+
+    padding: 1rem;
+    box-shadow: $shadow-light;
+    border-radius: 5px;
+  }
+  &__label {
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  height: 55rem;
+  width: 90rem;
+
+  background-color: rgba(#333, 0.5);
+  backdrop-filter: blur(4px);
 }

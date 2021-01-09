@@ -5,3 +5,10 @@
 
   fill: $color-grey-dark;
 }
+
+input,
+input:active,
+input:focus {
+  border: none;
+  outline: none;
+}
