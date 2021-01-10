@@ -136,7 +136,7 @@
 }
 
 .form {
-  display: none;
+  opacity: 0;
   visibility: hidden;
 
   display: flex;
@@ -160,6 +160,10 @@
     &:hover {
       box-shadow: $shadow-light;
     }
+
+    // &:invalid {
+    //   outline: 0.1px solid red;
+    // }
   }
   &__label {
     font-size: 1.4rem;
@@ -182,7 +186,7 @@
 }
 
 .popup {
-  display: none;
+  opacity: 0;
   visibility: hidden;
 
   position: absolute;
@@ -234,17 +238,4 @@
   color: rgb(255, 0, 0);
 
   cursor: pointer;
-  // &::after {
-  //   display: block;
-  //   content: '';
-
-  //   width: 2rem;
-  //   height: 1px;
-  //   background-color: rgb(255, 0, 0);
-
-  //   top: 0;
-  //   right: 0;
-
-  //   transform: rotateZ(45deg);
-  // }
 }
