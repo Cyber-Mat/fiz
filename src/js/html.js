@@ -1,4 +1,6 @@
-export const taskHTML = `<div class="list__item">
+export const taskHTML = `
+            <div class="list__item" data-id="%%ID%%">
+              <div class="cover">&nbsp;</div>
               <div class="done__icon-div">
                 <svg class="icon done-icon ">
                   <use xlink:href="./img/sprite.svg#icon-checkmark"></use>
@@ -10,7 +12,7 @@ export const taskHTML = `<div class="list__item">
                   <svg class="icon time-icon">
                     <use xlink:href="./img/sprite.svg#icon-access_time"></use>
                   </svg>
-                  <span>%%DUEDATE%%</span>
+                  <span class="due-date">%%DUEDATE%%</span>
                   <svg class="icon notif-icon">
                     <use
                       xlink:href="./img/sprite.svg#icon-notifications-outline"
@@ -23,7 +25,8 @@ export const taskHTML = `<div class="list__item">
               </svg>
             </div>`;
 
-export const detailHTML = `  <div class="detail__icon">
+export const detailHTML = `  
+          <div class="detail__icon">
             <svg class="icon done-icon">
               <use xlink:href="./img/sprite.svg#icon-checkmark"></use>
             </svg>

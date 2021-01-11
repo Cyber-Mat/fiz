@@ -20,6 +20,20 @@
     grid-template-columns: 2rem 1fr 1rem;
     align-items: center;
 
+    position: relative;
+
+    .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: transparent;
+    }
+
     // background-color: $color-grey-light-1;
 
     &:hover {
@@ -34,6 +48,8 @@
 
     .star-icon {
       //   fill: $color-primary;
+      position: relative;
+      z-index: 10000;
     }
 
     &--description {
@@ -58,10 +74,16 @@
 
         .time-icon {
           fill: $color-secondary-3;
+
+          position: relative;
+          z-index: 10000;
         }
 
         .notif-icon {
           fill: $color-secondary-1;
+
+          position: relative;
+          z-index: 10000;
         }
       }
     }
@@ -76,6 +98,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      position: relative;
+      z-index: 10000;
 
       .icon {
         fill: $color-secondary-6;
