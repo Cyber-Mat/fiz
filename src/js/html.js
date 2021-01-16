@@ -84,6 +84,7 @@ export const detailHTML = `
 
 export const tagHTML = `
           <div class="sidebar__tag--item sidebar__tag--work">
+            <div class="%%ID%% cover">&nbsp;</div>
             <span class="tag-color %%TAGCOLOUR%%">&nbsp;</span>
             <span class="tag-text">%%TAGTITLE%%</span>
             <span class="tag-count">%%TAGNUMBER%%</span>

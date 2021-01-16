@@ -57,7 +57,7 @@ const getUserInput = (taskClass, state) => {
   const taskTitle = DOM.taskTitle.value;
   const taskDescription = DOM.taskDescription.value;
   const taskDueDate = new Date(DOM.taskDueDate.value);
-  const taskTag = DOM.taskTag.value;
+  const taskTag = DOM.taskTag.value.toLowerCase();
   const id = uuidv4();
   const formattedDueDate = format(taskDueDate, 'EEE, do MMM `yy');
 
@@ -93,15 +93,16 @@ const getTags = (state, newTask, taskTag) => {
   if (state.tags[taskTag]) {
     state.tags[taskTag].push(newTask);
   } else {
+    const id = uuidv4();
+
     state.tags[taskTag] = [];
+    state.tags[taskTag].push(id);
     state.tags[taskTag].push(newTask);
   }
-
-  console.log(state.tags);
 };
 
 // RENDER TASK TO DOM
-const renderTask = state => {
+const renderTask = (state, tag) => {
   if (state.tasks) {
     let newHTML, formattedDueDate;
 
@@ -110,7 +111,6 @@ const renderTask = state => {
 
     state.tasks.forEach(task => {
       newHTML = taskHTML;
-      // formattedDueDate = format(task.taskDueDate, 'EEE, do MMM `yy');
 
       // REPLACE PLACEHOLDER WITH ACTUAL DATA
       newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
@@ -156,9 +156,34 @@ const renderTags = state => {
       '%%TAGTITLE%%',
       `${tag[0].toUpperCase()}${tag.slice(1)}`
     );
-    newHTML = newHTML.replace('%%TAGNUMBER%%', state.tags[tag].length);
+    newHTML = newHTML.replace('%%ID%%', state.tags[tag][0]);
+    newHTML = newHTML.replace('%%TAGNUMBER%%', state.tags[tag].length - 1);
 
     DOM.tagList.insertAdjacentHTML('beforeend', newHTML);
+  }
+};
+
+// RENDER TASKS BASED ON TAG
+const renderTaskByTags = (tags, id) => {
+  let newHTML;
+  DOM.taskList.innerHTML = '';
+
+  for (const tag in tags) {
+    if (id === tags[tag][0]) {
+      tags[tag].forEach(task => {
+        if (typeof task === 'object') {
+          newHTML = taskHTML;
+
+          // REPLACE PLACEHOLDER WITH ACTUAL DATA
+          newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
+          newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
+          newHTML = newHTML.replace('%%ID%%', task.id);
+
+          // UPDATE TASK LIST
+          DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
+        }
+      });
+    }
   }
 };
 
@@ -170,6 +195,7 @@ const viewController = (() => ({
   renderTaskDetails,
   getTags,
   renderTags,
+  renderTaskByTags,
 }))();
 
 export default viewController;

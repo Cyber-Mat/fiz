@@ -5,7 +5,14 @@ import modelController from './model';
 
 const appCtrl = ((viewCtrl, modelCtrl) => {
   // DOM VARIABLES
-  const { addTaskBtn, form, popup, popupCloseBtn, taskList } = viewCtrl.DOM;
+  const {
+    addTaskBtn,
+    form,
+    popup,
+    popupCloseBtn,
+    taskList,
+    tagList,
+  } = viewCtrl.DOM;
 
   const state = {
     tasks: [],
@@ -54,15 +61,22 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     viewCtrl.renderTags(state);
   });
 
-  ///////////////////////////
+  // TASK LIST EVENT LISTENER
   taskList.addEventListener('click', e => {
     const className = e.target.className;
 
     if (className === 'cover') {
-      // console.log(className);
-
       const id = e.target.parentNode.getAttribute('data-id');
       viewCtrl.renderTaskDetails(state, id);
+    }
+  });
+
+  // TAGS LIST EVENT LISTENER
+  tagList.addEventListener('click', e => {
+    const [id, className] = e.target.classList;
+
+    if (className === 'cover') {
+      viewCtrl.renderTaskByTags(state.tags, id);
     }
   });
 })(viewController, modelController);

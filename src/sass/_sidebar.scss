@@ -64,6 +64,9 @@
       align-items: center;
 
       margin-bottom: 1rem;
+      position: relative;
+
+      cursor: pointer;
 
       .tag {
         &-color {
