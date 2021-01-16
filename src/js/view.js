@@ -16,6 +16,7 @@ const DOM = {
   taskList: document.querySelector('.list__content'),
   detailSection: document.querySelector('.detail'),
   tagList: document.querySelector('.sidebar__tag'),
+  taskListHeaderText: document.querySelector('.list__header--text'),
 };
 
 const popupOpen = () => {
@@ -170,6 +171,11 @@ const renderTaskByTags = (tags, id) => {
 
   for (const tag in tags) {
     if (id === tags[tag][0]) {
+      // SET TASK LIST HEADER TEXT TO TAGNAME
+      DOM.taskListHeaderText.textContent = `${
+        tag[0].toUpperCase() + tag.slice(1)
+      }`;
+
       tags[tag].forEach(task => {
         if (typeof task === 'object') {
           newHTML = taskHTML;
