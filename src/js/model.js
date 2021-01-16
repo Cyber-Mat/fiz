@@ -14,6 +14,10 @@ const sortTasksByDate = state => {
   state.tasks.sort(sortFunction);
 };
 
+const sortTasksByTag = state => {
+  // ADD TAGS
+};
+
 const modelController = (() => ({
   sortTasksByDate,
 }))();

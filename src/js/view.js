@@ -1,7 +1,7 @@
 import { compareAsc, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
-import { detailHTML, taskHTML } from './html';
+import { detailHTML, taskHTML, tagHTML } from './html';
 
 const DOM = {
   addTaskBtn: document.querySelector('.sidebar__add'),
@@ -15,6 +15,7 @@ const DOM = {
   taskSubmitBtn: document.querySelector('.submit-btn'),
   taskList: document.querySelector('.list__content'),
   detailSection: document.querySelector('.detail'),
+  tagList: document.querySelector('.sidebar__tag'),
 };
 
 const popupOpen = () => {
@@ -87,6 +88,18 @@ const getUserInput = (taskClass, state) => {
   }
 };
 
+// ADD TASKS BY TAGS
+const getTags = (state, newTask, taskTag) => {
+  if (state.tags[taskTag]) {
+    state.tags[taskTag].push(newTask);
+  } else {
+    state.tags[taskTag] = [];
+    state.tags[taskTag].push(newTask);
+  }
+
+  console.log(state.tags);
+};
+
 // RENDER TASK TO DOM
 const renderTask = state => {
   if (state.tasks) {
@@ -130,12 +143,33 @@ const renderTaskDetails = (state, id) => {
   });
 };
 
+// RENDER TAGS TO DOM
+const renderTags = state => {
+  let newHTML;
+
+  // CLEAR TAGS
+  DOM.tagList.innerHTML = '';
+
+  for (const tag in state.tags) {
+    newHTML = tagHTML;
+    newHTML = newHTML.replace(
+      '%%TAGTITLE%%',
+      `${tag[0].toUpperCase()}${tag.slice(1)}`
+    );
+    newHTML = newHTML.replace('%%TAGNUMBER%%', state.tags[tag].length);
+
+    DOM.tagList.insertAdjacentHTML('beforeend', newHTML);
+  }
+};
+
 const viewController = (() => ({
   DOM,
   popupEvents,
   getUserInput,
   renderTask,
   renderTaskDetails,
+  getTags,
+  renderTags,
 }))();
 
 export default viewController;

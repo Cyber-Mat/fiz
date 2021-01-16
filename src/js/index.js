@@ -46,6 +46,12 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
     // UPDATE TASK LIST WITH NEW TASK
     viewCtrl.renderTask(state);
+
+    // GET TAGS
+    viewCtrl.getTags(state, newTask, newTask.taskTag);
+
+    // RENDER TAGS
+    viewCtrl.renderTags(state);
   });
 
   ///////////////////////////
