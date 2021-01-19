@@ -1,25 +1,32 @@
-import { compareAsc } from 'date-fns';
-
 const sortFunction = (a, b) => {
   if (a.taskDueDate < b.taskDueDate) return -1;
   if (a.taskDueDate > b.taskDueDate) return 1;
   return 0;
 };
 
-const sortTasksByDate = state => {
-  // SORT DATES IN DATE ARRAY
-  state.dates = state.dates.sort(compareAsc);
-
+const sortTasksByDate = tasks => {
   // SORT TASKS BASED ON DUE DATE
-  state.tasks.sort(sortFunction);
+  tasks.sort(sortFunction);
 };
 
-const sortTasksByTag = state => {
-  // ADD TAGS
+const removeCompleted = (state, id) => {
+  // LOOP THROUGH ALL TASKS AND REMOVE COMPLETED
+  state.tasks.forEach((task, i) => {
+    if (task.id === id) {
+      // Add task to completed array
+      state.completed.push(task);
+
+      // Remove tasks from tasks list array
+      state.tasks.splice(i, 1);
+
+      console.log(state);
+    }
+  });
 };
 
 const modelController = (() => ({
   sortTasksByDate,
+  removeCompleted,
 }))();
 
 export default modelController;

@@ -17,6 +17,8 @@ const DOM = {
   detailSection: document.querySelector('.detail'),
   tagList: document.querySelector('.sidebar__tag'),
   taskListHeaderText: document.querySelector('.list__header--text'),
+  sidebarOverview: document.querySelector('.sidebar__overview'),
+  sidebarDone: document.querySelector('.sidebar__done'),
 };
 
 const popupOpen = () => {
@@ -67,7 +69,7 @@ const getUserInput = (taskClass, state) => {
       taskTitle,
       taskDescription,
       taskDueDate,
-      taskTag,
+      taskTag: taskTag ? taskTag : 'Primary',
       id,
       formattedDueDate,
     };
@@ -75,9 +77,6 @@ const getUserInput = (taskClass, state) => {
     // CREATE NEW TASK OBJECT AND STORE IN STATE
     const newTask = new taskClass(userInput);
     state.tasks.push(newTask);
-
-    // STORE DATE IN DATES ARRAY
-    state.dates.push(taskDueDate);
 
     // CLEAR USER INPUT
     clearInput();
@@ -103,14 +102,17 @@ const getTags = (state, newTask, taskTag) => {
 };
 
 // RENDER TASK TO DOM
-const renderTask = (state, tag) => {
-  if (state.tasks) {
-    let newHTML, formattedDueDate;
+const renderTask = tasks => {
+  if (tasks) {
+    let newHTML;
 
     // CLEAR TASK LIST
     DOM.taskList.innerHTML = '';
 
-    state.tasks.forEach(task => {
+    // RENAME TASK LIST HEADER
+    DOM.taskListHeaderText.textContent = 'All';
+
+    tasks.forEach(task => {
       newHTML = taskHTML;
 
       // REPLACE PLACEHOLDER WITH ACTUAL DATA
@@ -165,7 +167,7 @@ const renderTags = state => {
 };
 
 // RENDER TASKS BASED ON TAG
-const renderTaskByTags = (tags, id) => {
+const renderTaskByTags = (tags, id, sortTasks) => {
   let newHTML;
   DOM.taskList.innerHTML = '';
 
@@ -175,6 +177,9 @@ const renderTaskByTags = (tags, id) => {
       DOM.taskListHeaderText.textContent = `${
         tag[0].toUpperCase() + tag.slice(1)
       }`;
+
+      // SORT TASKS BY DUE DATE
+      sortTasks(tags[tag]);
 
       tags[tag].forEach(task => {
         if (typeof task === 'object') {
@@ -193,6 +198,8 @@ const renderTaskByTags = (tags, id) => {
   }
 };
 
+const deleteTask = () => {};
+
 const viewController = (() => ({
   DOM,
   popupEvents,
@@ -202,6 +209,7 @@ const viewController = (() => ({
   getTags,
   renderTags,
   renderTaskByTags,
+  deleteTask,
 }))();
 
 export default viewController;

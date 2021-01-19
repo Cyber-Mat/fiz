@@ -12,12 +12,14 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     popupCloseBtn,
     taskList,
     tagList,
+    sidebarOverview,
+    sidebarDone,
   } = viewCtrl.DOM;
 
   const state = {
     tasks: [],
     tags: {},
-    dates: [],
+    completed: [],
   };
 
   class Task {
@@ -49,10 +51,10 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     const newTask = viewCtrl.getUserInput(Task, state);
 
     // SORT TASKS BY DUE DATE
-    modelCtrl.sortTasksByDate(state);
+    modelCtrl.sortTasksByDate(state.tasks);
 
     // UPDATE TASK LIST WITH NEW TASK
-    viewCtrl.renderTask(state);
+    viewCtrl.renderTask(state.tasks);
 
     // GET TAGS
     viewCtrl.getTags(state, newTask, newTask.taskTag);
@@ -61,13 +63,23 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     viewCtrl.renderTags(state);
   });
 
-  // TASK LIST EVENT LISTENER
+  // TASK LIST EVENT LISTENER (EVENT BUBBLING)
   taskList.addEventListener('click', e => {
     const className = e.target.className;
 
+    // TASK LIST EVENT
     if (className === 'cover') {
       const id = e.target.parentNode.getAttribute('data-id');
       viewCtrl.renderTaskDetails(state, id);
+    }
+
+    // DONE ICON EVENT
+    if (className === 'done__icon-div') {
+      const id = e.target.parentNode.getAttribute('data-id');
+
+      // MOVE COMPLETED TASKS FROM TASKS LIST TO DONE
+      modelCtrl.removeCompleted(state, id);
+      viewCtrl.renderTask(state.tasks);
     }
   });
 
@@ -76,7 +88,17 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     const [id, className] = e.target.classList;
 
     if (className === 'cover') {
-      viewCtrl.renderTaskByTags(state.tags, id);
+      viewCtrl.renderTaskByTags(state.tags, id, modelCtrl.sortTasksByDate);
     }
+  });
+
+  // SIDEBAR OVERVIEW EVENT LISTENER
+  sidebarOverview.addEventListener('click', e => {
+    viewCtrl.renderTask(state.tasks);
+  });
+
+  // SIDEBAR DONE EVENT LISTENER
+  sidebarDone.addEventListener('click', e => {
+    viewCtrl.renderTask(state.completed);
   });
 })(viewController, modelController);
