@@ -28,3 +28,24 @@ input:focus {
 .cursor {
   cursor: pointer;
 }
+
+.blue {
+  background-color: $color-secondary-1;
+}
+
+.yellow {
+  background-color: $color-secondary-2;
+}
+.green {
+  background-color: $color-secondary-3;
+}
+
+.pink {
+  background-color: $color-secondary-4;
+}
+.red {
+  background-color: $color-primary;
+}
+.purple {
+  background-color: $color-secondary-5;
+}

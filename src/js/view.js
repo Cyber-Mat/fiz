@@ -150,6 +150,8 @@ const renderTaskDetails = (state, id) => {
 const renderTags = state => {
   let newHTML;
 
+  const tagColour = ['blue', 'yellow', 'green', 'pink', 'red', 'purple'];
+
   // CLEAR TAGS
   DOM.tagList.innerHTML = '';
 
@@ -161,6 +163,10 @@ const renderTags = state => {
     );
     newHTML = newHTML.replace('%%ID%%', state.tags[tag][0]);
     newHTML = newHTML.replace('%%TAGNUMBER%%', state.tags[tag].length - 1);
+    newHTML = newHTML.replace(
+      '%%TAGCOLOUR%%',
+      tagColour[Math.floor(Math.random() * 6)]
+    );
 
     DOM.tagList.insertAdjacentHTML('beforeend', newHTML);
   }
