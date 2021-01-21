@@ -9,7 +9,7 @@ const sortTasksByDate = tasks => {
   tasks.sort(sortFunction);
 };
 
-const removeCompleted = (state, id) => {
+const removeCompleted = (state, id, tag) => {
   // LOOP THROUGH ALL TASKS AND REMOVE COMPLETED
   state.tasks.forEach((task, i) => {
     if (task.id === id) {
@@ -19,7 +19,18 @@ const removeCompleted = (state, id) => {
       // Remove tasks from tasks list array
       state.tasks.splice(i, 1);
 
+      // Clear detail section
+      document.querySelector('.detail').innerHTML = '';
+
       console.log(state);
+    }
+  });
+
+  // LOOP THROUGH TAGS AND REMOVE COMPLETED
+  state.tags[tag].forEach((task, i) => {
+    if (task.id === id) {
+      // Remove tasks from tags
+      state.tags[tag].splice(i, 1);
     }
   });
 };

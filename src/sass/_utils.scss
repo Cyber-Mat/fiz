@@ -49,3 +49,13 @@ input:focus {
 .purple {
   background-color: $color-secondary-5;
 }
+
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}

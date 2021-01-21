@@ -76,10 +76,16 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     // DONE ICON EVENT
     if (className === 'done__icon-div') {
       const id = e.target.parentNode.getAttribute('data-id');
+      const tag = e.target.parentNode.getAttribute('data-tag');
 
       // MOVE COMPLETED TASKS FROM TASKS LIST TO DONE
-      modelCtrl.removeCompleted(state, id);
-      viewCtrl.renderTask(state.tasks);
+      modelCtrl.removeCompleted(state, id, tag);
+
+      // RENDER NEW TASK LIST
+      viewCtrl.renderTask(state.tasks, 'show');
+
+      // RENDER TAGS
+      viewCtrl.renderTags(state);
     }
   });
 
@@ -99,6 +105,6 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
   // SIDEBAR DONE EVENT LISTENER
   sidebarDone.addEventListener('click', e => {
-    viewCtrl.renderTask(state.completed);
+    viewCtrl.renderTask(state.completed, 'show');
   });
 })(viewController, modelController);

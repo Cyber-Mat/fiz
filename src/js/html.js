@@ -1,8 +1,8 @@
 export const taskHTML = `
-            <div class="list__item" data-id="%%ID%%">
+            <div class="list__item" data-id="%%ID%%" data-tag="%%TAG%%">
               <div class="cover">&nbsp;</div>
               <div class="done__icon-div">
-                <svg class="icon done-icon ">
+                <svg class="icon %%SHOW%%">
                   <use xlink:href="./img/sprite.svg#icon-checkmark"></use>
                 </svg>
               </div>

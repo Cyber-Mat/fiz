@@ -102,7 +102,7 @@ const getTags = (state, newTask, taskTag) => {
 };
 
 // RENDER TASK TO DOM
-const renderTask = tasks => {
+const renderTask = (tasks, show) => {
   if (tasks) {
     let newHTML;
 
@@ -115,10 +115,19 @@ const renderTask = tasks => {
     tasks.forEach(task => {
       newHTML = taskHTML;
 
+      if (show) {
+        // ADD CLASS TO SHOW DONE ICON
+        newHTML = newHTML.replace('%%SHOW%%', 'show');
+      } else {
+        // ADD CLASS TO HIDE DONE ICON
+        newHTML = newHTML.replace('%%SHOW%%', 'hide');
+      }
+
       // REPLACE PLACEHOLDER WITH ACTUAL DATA
       newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
       newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
       newHTML = newHTML.replace('%%ID%%', task.id);
+      newHTML = newHTML.replace('%%TAG%%', task.taskTag);
 
       // UPDATE TASK LIST
       DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
@@ -192,9 +201,11 @@ const renderTaskByTags = (tags, id, sortTasks) => {
           newHTML = taskHTML;
 
           // REPLACE PLACEHOLDER WITH ACTUAL DATA
+          newHTML = newHTML.replace('%%SHOW%%', 'hide');
           newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
           newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
           newHTML = newHTML.replace('%%ID%%', task.id);
+          newHTML = newHTML.replace('%%TAG%%', task.taskTag);
 
           // UPDATE TASK LIST
           DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
