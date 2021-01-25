@@ -19,6 +19,7 @@ const DOM = {
   taskListHeaderText: document.querySelector('.list__header--text'),
   sidebarOverview: document.querySelector('.sidebar__overview'),
   sidebarDone: document.querySelector('.sidebar__done'),
+  sidebarImportant: document.querySelector('.sidebar__important'),
 };
 
 const popupOpen = () => {
@@ -123,6 +124,12 @@ const renderTask = (tasks, show) => {
         newHTML = newHTML.replace('%%SHOW%%', 'hide');
       }
 
+      if (task.important === 'yes') {
+        newHTML = newHTML.replace('%%STARICON%%', 'red');
+      } else {
+        newHTML = newHTML.replace('%%STARICON%%', 'black');
+      }
+
       // REPLACE PLACEHOLDER WITH ACTUAL DATA
       newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
       newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
@@ -215,7 +222,13 @@ const renderTaskByTags = (tags, id, sortTasks) => {
   }
 };
 
-const deleteTask = () => {};
+const changeHeader = title => {
+  DOM.taskListHeaderText.textContent = title;
+};
+
+const toggleFill = icon => {
+  icon.id === 'black' ? (icon.id = 'red') : (icon.id = 'black');
+};
 
 const viewController = (() => ({
   DOM,
@@ -226,7 +239,8 @@ const viewController = (() => ({
   getTags,
   renderTags,
   renderTaskByTags,
-  deleteTask,
+  changeHeader,
+  toggleFill,
 }))();
 
 export default viewController;

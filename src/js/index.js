@@ -14,12 +14,14 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     tagList,
     sidebarOverview,
     sidebarDone,
+    sidebarImportant,
   } = viewCtrl.DOM;
 
   const state = {
     tasks: [],
     tags: {},
     completed: [],
+    important: [],
   };
 
   class Task {
@@ -37,6 +39,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
         (this.taskTag = taskTag);
       this.id = id;
       this.formattedDueDate = formattedDueDate;
+      this.important = '';
     }
   }
 
@@ -66,6 +69,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   // TASK LIST EVENT LISTENER (EVENT BUBBLING)
   taskList.addEventListener('click', e => {
     const className = e.target.className;
+    const classList = e.target.classList;
 
     // TASK LIST EVENT
     if (className === 'cover') {
@@ -87,6 +91,15 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       // RENDER TAGS
       viewCtrl.renderTags(state);
     }
+
+    // STAR ICON EVENT
+    if (classList[1] === 'star-icon') {
+      const id = e.target.parentNode.getAttribute('data-id');
+
+      modelCtrl.toggleImportant(state, id);
+      // viewCtrl.toggleFill(e.target);
+      viewCtrl.renderTask(state.tasks);
+    }
   });
 
   // TAGS LIST EVENT LISTENER
@@ -106,5 +119,12 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   // SIDEBAR DONE EVENT LISTENER
   sidebarDone.addEventListener('click', e => {
     viewCtrl.renderTask(state.completed, 'show');
+    viewCtrl.changeHeader('Done');
+  });
+
+  // SIDEBAR IMPORTANT EVENT LISTENER
+  sidebarImportant.addEventListener('click', e => {
+    viewCtrl.renderTask(state.important);
+    viewCtrl.changeHeader('Important');
   });
 })(viewController, modelController);

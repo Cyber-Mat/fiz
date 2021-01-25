@@ -21,8 +21,6 @@ const removeCompleted = (state, id, tag) => {
 
       // Clear detail section
       document.querySelector('.detail').innerHTML = '';
-
-      console.log(state);
     }
   });
 
@@ -35,9 +33,28 @@ const removeCompleted = (state, id, tag) => {
   });
 };
 
+const toggleImportant = (state, id) => {
+  // LOOP THROUGH ALL TASKS AND ADD IMPORTANT TASKS TO IMPORTANT ARRAY IN STATE
+  state.tasks.forEach(task => {
+    if (task.id === id) {
+      if (state.important.indexOf(task) < 0) {
+        task['important'] = 'yes';
+        state.important.push(task);
+      } else {
+        // LOOP THROUGH ALL TASKS AND REMOVE IMPORTANT TASKS TO IMPORTANT ARRAY IN STATE
+        task['important'] = '';
+        state.important.forEach((arr, i) => {
+          if (arr.id === id) state.important.splice(i, 1);
+        });
+      }
+    }
+  });
+};
+
 const modelController = (() => ({
   sortTasksByDate,
   removeCompleted,
+  toggleImportant,
 }))();
 
 export default modelController;
