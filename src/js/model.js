@@ -37,7 +37,10 @@ const toggleImportant = (state, id) => {
   // LOOP THROUGH ALL TASKS AND ADD IMPORTANT TASKS TO IMPORTANT ARRAY IN STATE
   state.tasks.forEach(task => {
     if (task.id === id) {
-      if (state.important.indexOf(task) < 0) {
+      if (
+        state.important.indexOf(task) < 0 &&
+        state.completed.indexOf(task) < 0
+      ) {
         task['important'] = 'yes';
         state.important.push(task);
       } else {

@@ -20,6 +20,7 @@ const DOM = {
   sidebarOverview: document.querySelector('.sidebar__overview'),
   sidebarDone: document.querySelector('.sidebar__done'),
   sidebarImportant: document.querySelector('.sidebar__important'),
+  sidebarToday: document.querySelector('.sidebar__today'),
 };
 
 const popupOpen = () => {
@@ -226,8 +227,41 @@ const changeHeader = title => {
   DOM.taskListHeaderText.textContent = title;
 };
 
-const toggleFill = icon => {
-  icon.id === 'black' ? (icon.id = 'red') : (icon.id = 'black');
+// const toggleFill = icon => {
+//   icon.id === 'black' ? (icon.id = 'red') : (icon.id = 'black');
+// };
+
+const renderToday = state => {
+  let newHTML;
+  const today = new Date().toDateString();
+
+  // CLEAR TASK LIST
+  DOM.taskList.innerHTML = '';
+
+  // RENAME TASK LIST HEADER
+  DOM.taskListHeaderText.textContent = 'Today';
+
+  state.tasks.forEach(task => {
+    if (task.taskDueDate.toDateString() === today) {
+      newHTML = taskHTML;
+
+      if (task.important === 'yes') {
+        newHTML = newHTML.replace('%%STARICON%%', 'red');
+      } else {
+        newHTML = newHTML.replace('%%STARICON%%', 'black');
+      }
+
+      // REPLACE PLACEHOLDER WITH ACTUAL DATA
+      newHTML = newHTML.replace('%%SHOW%%', 'hide');
+      newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
+      newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
+      newHTML = newHTML.replace('%%ID%%', task.id);
+      newHTML = newHTML.replace('%%TAG%%', task.taskTag);
+
+      // UPDATE TASK LIST
+      DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
+    }
+  });
 };
 
 const viewController = (() => ({
@@ -240,7 +274,7 @@ const viewController = (() => ({
   renderTags,
   renderTaskByTags,
   changeHeader,
-  toggleFill,
+  renderToday,
 }))();
 
 export default viewController;

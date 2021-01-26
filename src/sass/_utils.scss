@@ -59,3 +59,7 @@ input:focus {
   opacity: 0;
   visibility: hidden;
 }
+
+::-webkit-input-placeholder {
+  color: rgba(#333, 0.6);
+}

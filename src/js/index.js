@@ -15,6 +15,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     sidebarOverview,
     sidebarDone,
     sidebarImportant,
+    sidebarToday,
   } = viewCtrl.DOM;
 
   const state = {
@@ -86,7 +87,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       modelCtrl.removeCompleted(state, id, tag);
 
       // RENDER NEW TASK LIST
-      viewCtrl.renderTask(state.tasks, 'show');
+      viewCtrl.renderTask(state.tasks);
 
       // RENDER TAGS
       viewCtrl.renderTags(state);
@@ -97,7 +98,6 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       const id = e.target.parentNode.getAttribute('data-id');
 
       modelCtrl.toggleImportant(state, id);
-      // viewCtrl.toggleFill(e.target);
       viewCtrl.renderTask(state.tasks);
     }
   });
@@ -124,7 +124,13 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
   // SIDEBAR IMPORTANT EVENT LISTENER
   sidebarImportant.addEventListener('click', e => {
+    modelCtrl.sortTasksByDate(state.important);
     viewCtrl.renderTask(state.important);
     viewCtrl.changeHeader('Important');
+  });
+
+  // SIDEBAR TODAY EVENT LISTENER
+  sidebarToday.addEventListener('click', e => {
+    viewCtrl.renderToday(state);
   });
 })(viewController, modelController);
