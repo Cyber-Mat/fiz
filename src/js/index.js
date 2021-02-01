@@ -2,6 +2,7 @@ import '../sass/main.scss';
 
 import viewController from './view';
 import modelController from './model';
+import { auth, signInWithGoogle } from './firebase';
 
 const appCtrl = ((viewCtrl, modelCtrl) => {
   // DOM VARIABLES
@@ -16,15 +17,23 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     sidebarDone,
     sidebarImportant,
     sidebarToday,
+    loginBtn,
   } = viewCtrl.DOM;
 
   const state = {
+    currentUser: null,
     tasks: [],
     tags: {},
     completed: [],
     important: [],
   };
 
+  // USER AUTHENTICATION
+  auth.onAuthStateChanged(user => {
+    state.currentUser = user;
+
+    console.log(user);
+  });
   class Task {
     constructor({
       taskTitle,
@@ -133,4 +142,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   sidebarToday.addEventListener('click', e => {
     viewCtrl.renderToday(state);
   });
+
+  // GOOGLE SIGN IN EVENT LISTENER
+  loginBtn.addEventListener('click', signInWithGoogle);
 })(viewController, modelController);

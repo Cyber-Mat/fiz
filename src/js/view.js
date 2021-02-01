@@ -21,6 +21,7 @@ const DOM = {
   sidebarDone: document.querySelector('.sidebar__done'),
   sidebarImportant: document.querySelector('.sidebar__important'),
   sidebarToday: document.querySelector('.sidebar__today'),
+  loginBtn: document.querySelector('.login__btn'),
 };
 
 const popupOpen = () => {
