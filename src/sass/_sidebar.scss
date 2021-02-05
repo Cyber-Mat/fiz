@@ -188,22 +188,6 @@
   }
 }
 
-.popup {
-  // opacity: 0;
-  // visibility: hidden;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-
-  height: 100%;
-  width: 100%;
-
-  background-color: rgba(#333, 0.3);
-  backdrop-filter: blur(4px);
-}
-
 .submit-btn {
   padding: 1rem 2rem;
   box-shadow: $shadow-light;

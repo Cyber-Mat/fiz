@@ -2,38 +2,28 @@ import '../sass/main.scss';
 
 import viewController from './view';
 import modelController from './model';
-import { auth, signInWithGoogle } from './firebase';
 
 const appCtrl = ((viewCtrl, modelCtrl) => {
   // DOM VARIABLES
   const {
     addTaskBtn,
     form,
-    popup,
-    popupCloseBtn,
     taskList,
     tagList,
     sidebarOverview,
     sidebarDone,
     sidebarImportant,
     sidebarToday,
-    loginBtn,
+    searchInput,
   } = viewCtrl.DOM;
 
   const state = {
-    currentUser: null,
     tasks: [],
     tags: {},
     completed: [],
     important: [],
   };
 
-  // USER AUTHENTICATION
-  auth.onAuthStateChanged(user => {
-    state.currentUser = user;
-
-    console.log(user);
-  });
   class Task {
     constructor({
       taskTitle,
@@ -143,6 +133,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     viewCtrl.renderToday(state);
   });
 
-  // GOOGLE SIGN IN EVENT LISTENER
-  loginBtn.addEventListener('click', signInWithGoogle);
+  // SEARCH INPUT EVENT LISTENER
+  searchInput.addEventListener('input', e => {
+    const value = e.target.value;
+    modelCtrl.searchTask(state, value, viewCtrl.renderTask);
+  });
 })(viewController, modelController);

@@ -6,7 +6,7 @@ import { detailHTML, taskHTML, tagHTML } from './html';
 const DOM = {
   addTaskBtn: document.querySelector('.sidebar__add'),
   form: document.querySelector('.form'),
-  popup: document.querySelector('.popup'),
+  popup: document.querySelector('.add-popup'),
   popupCloseBtn: document.querySelector('.close-popup'),
   taskTitle: document.querySelector('#title'),
   taskDescription: document.querySelector('#description'),
@@ -21,7 +21,7 @@ const DOM = {
   sidebarDone: document.querySelector('.sidebar__done'),
   sidebarImportant: document.querySelector('.sidebar__important'),
   sidebarToday: document.querySelector('.sidebar__today'),
-  loginBtn: document.querySelector('.login__btn'),
+  searchInput: document.querySelector('.search__input'),
 };
 
 const popupOpen = () => {
@@ -85,7 +85,7 @@ const getUserInput = (taskClass, state) => {
     clearInput();
 
     // CLOSE POPUP
-    popupClose();
+    popupClose(DOM.form, DOM.addPopup);
 
     return newTask;
   }
@@ -267,6 +267,8 @@ const renderToday = state => {
 
 const viewController = (() => ({
   DOM,
+  popupOpen,
+  popupClose,
   popupEvents,
   getUserInput,
   renderTask,

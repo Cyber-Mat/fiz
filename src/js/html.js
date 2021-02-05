@@ -13,11 +13,13 @@ export const taskHTML = `
                     <use xlink:href="./img/sprite.svg#icon-access_time"></use>
                   </svg>
                   <span class="due-date">%%DUEDATE%%</span>
+                  <!--
                   <svg class="icon notif-icon">
                     <use
                       xlink:href="./img/sprite.svg#icon-notifications-outline"
                     ></use>
                   </svg>
+                  -->
                 </div>
               </div>
               <svg id="%%STARICON%%" class="icon star-icon">
@@ -64,6 +66,8 @@ export const detailHTML = `
             <p class="detail__text">
               %%DETAILDESCRIPTION%%
             </p>
+            
+            <!--
             <div class="detail__step">
               <a class="detail__step--add"> &#43; Add step </a>
               <div class="detail__step--item">
@@ -80,6 +84,7 @@ export const detailHTML = `
                 <label for="step item">visit the dentist</label>
               </div>
             </div>
+            -->
           </div>`;
 
 export const tagHTML = `

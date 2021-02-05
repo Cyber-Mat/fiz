@@ -63,3 +63,19 @@ input:focus {
 ::-webkit-input-placeholder {
   color: rgba(#333, 0.6);
 }
+
+.popup {
+  opacity: 0;
+  visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(#333, 0.3);
+  backdrop-filter: blur(4px);
+}

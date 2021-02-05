@@ -54,10 +54,19 @@ const toggleImportant = (state, id) => {
   });
 };
 
+const searchTask = (state, value, renderTasks) => {
+  const filteredArr = state.tasks.filter(task => {
+    return task.taskTitle.includes(value);
+  });
+
+  renderTasks(filteredArr);
+};
+
 const modelController = (() => ({
   sortTasksByDate,
   removeCompleted,
   toggleImportant,
+  searchTask,
 }))();
 
 export default modelController;
