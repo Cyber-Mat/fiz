@@ -70,13 +70,14 @@ const pageCtrl = (tasks, renderTasks, pageNumber, show) => {
 
   const newTaskList = tasks.slice(start, end);
 
+  /*
   newTaskList.forEach(task => {
     if (newTaskList.indexOf(task) >= pageNumber * taskNumber) {
       pageNumber += 1;
-    } else {
-      renderTasks(newTaskList, show);
     }
   });
+  */
+  renderTasks(newTaskList, show);
 };
 
 const modelController = (() => ({
