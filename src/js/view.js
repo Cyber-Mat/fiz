@@ -22,6 +22,8 @@ const DOM = {
   sidebarImportant: document.querySelector('.sidebar__important'),
   sidebarToday: document.querySelector('.sidebar__today'),
   searchInput: document.querySelector('.search__input'),
+  pageNext: document.querySelector('.page__next'),
+  pagePrev: document.querySelector('.page__prev'),
 };
 
 const popupOpen = () => {
@@ -265,6 +267,21 @@ const renderToday = state => {
   });
 };
 
+const showPageNumbers = (tasks, pageNumber) => {
+  const pages = Math.ceil(tasks.length / 6);
+
+  if (pageNumber === 1 && pages > 1) {
+    DOM.pageNext.style.display = 'block';
+    DOM.pagePrev.style.display = 'none';
+  } else if (pageNumber < pages) {
+    DOM.pagePrev.style.display = 'block';
+    DOM.pageNext.style.display = 'block';
+  } else if (pages === pageNumber && pages > 1) {
+    DOM.pagePrev.style.display = 'block';
+    DOM.pageNext.style.display = 'none';
+  }
+};
+
 const viewController = (() => ({
   DOM,
   popupOpen,
@@ -278,6 +295,7 @@ const viewController = (() => ({
   renderTaskByTags,
   changeHeader,
   renderToday,
+  showPageNumbers,
 }))();
 
 export default viewController;

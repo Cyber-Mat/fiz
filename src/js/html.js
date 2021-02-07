@@ -28,11 +28,12 @@ export const taskHTML = `
             </div>`;
 
 export const detailHTML = `  
-          <div class="detail__icon">
+            <div class="detail__icon">
             <svg class="icon done-icon">
-              <use xlink:href="./img/sprite.svg#icon-checkmark"></use>
+              <use xlink:href="./img/sprite.svg#icon-"></use>
             </svg>
           </div>
+      
           <div class="detail__content">
             <div class="detail__header">
               <div class="top">
@@ -41,11 +42,13 @@ export const detailHTML = `
                   <svg class="icon">
                     <use xlink:href="./img/sprite.svg#icon-star-o"></use>
                   </svg>
+                  <!--
                   <svg class="icon">
                     <use
                       xlink:href="./img/sprite.svg#icon-dots-horizontal-triple"
                     ></use>
                   </svg>
+                  -->
                 </div>
               </div>
               <div class="bottom">
@@ -55,12 +58,14 @@ export const detailHTML = `
                   </svg>
                   <span>%%DETAILDUEDATE%%</span>
                 </div>
+                <!--
                 <div class="reminder">
                   <svg class="icon">
                     <use xlink:href="./img/sprite.svg#icon-alarmclock"></use>
                   </svg>
                   <span>Remind me at 9:15am</span>
                 </div>
+                -->
               </div>
             </div>
             <p class="detail__text">

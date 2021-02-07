@@ -15,6 +15,8 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     sidebarImportant,
     sidebarToday,
     searchInput,
+    pageNext,
+    pagePrev,
   } = viewCtrl.DOM;
 
   const state = {
@@ -23,6 +25,8 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     completed: [],
     important: [],
   };
+
+  let pageNumber = 1;
 
   class Task {
     constructor({
@@ -56,8 +60,12 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     // SORT TASKS BY DUE DATE
     modelCtrl.sortTasksByDate(state.tasks);
 
+    //////////////////////////////////////////
     // UPDATE TASK LIST WITH NEW TASK
-    viewCtrl.renderTask(state.tasks);
+    // viewCtrl.renderTask(state.tasks);
+    pageNumber = 1;
+    viewCtrl.showPageNumbers(state.tasks, pageNumber);
+    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
 
     // GET TAGS
     viewCtrl.getTags(state, newTask, newTask.taskTag);
@@ -86,7 +94,10 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       modelCtrl.removeCompleted(state, id, tag);
 
       // RENDER NEW TASK LIST
-      viewCtrl.renderTask(state.tasks);
+      // viewCtrl.renderTask(state.tasks);
+      pageNumber = 1;
+      viewCtrl.showPageNumbers(state.tasks, pageNumber);
+      modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
 
       // RENDER TAGS
       viewCtrl.renderTags(state);
@@ -97,7 +108,11 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       const id = e.target.parentNode.getAttribute('data-id');
 
       modelCtrl.toggleImportant(state, id);
-      viewCtrl.renderTask(state.tasks);
+
+      pageNumber = 1;
+      viewCtrl.showPageNumbers(state.tasks, pageNumber);
+      // viewCtrl.renderTask(state.tasks);
+      modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
     }
   });
 
@@ -112,19 +127,34 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
   // SIDEBAR OVERVIEW EVENT LISTENER
   sidebarOverview.addEventListener('click', e => {
-    viewCtrl.renderTask(state.tasks);
+    pageNumber = 1;
+    viewCtrl.showPageNumbers(state.tasks, pageNumber);
+    // viewCtrl.renderTask(state.tasks);
+    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
   });
 
   // SIDEBAR DONE EVENT LISTENER
   sidebarDone.addEventListener('click', e => {
-    viewCtrl.renderTask(state.completed, 'show');
+    pageNumber = 1;
+    viewCtrl.showPageNumbers(state.completed, pageNumber);
+    // viewCtrl.renderTask(state.completed, 'show');
+    modelCtrl.pageCtrl(
+      state.completed,
+      viewCtrl.renderTask,
+      pageNumber,
+      'show'
+    );
     viewCtrl.changeHeader('Done');
   });
 
   // SIDEBAR IMPORTANT EVENT LISTENER
   sidebarImportant.addEventListener('click', e => {
     modelCtrl.sortTasksByDate(state.important);
-    viewCtrl.renderTask(state.important);
+
+    pageNumber = 1;
+    viewCtrl.showPageNumbers(state.important, pageNumber);
+    // viewCtrl.renderTask(state.important);
+    modelCtrl.pageCtrl(state.important, viewCtrl.renderTask, pageNumber);
     viewCtrl.changeHeader('Important');
   });
 
@@ -137,5 +167,19 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   searchInput.addEventListener('input', e => {
     const value = e.target.value;
     modelCtrl.searchTask(state, value, viewCtrl.renderTask);
+  });
+
+  // PAGES
+  pageNext.addEventListener('click', e => {
+    pageNumber += 1;
+
+    viewCtrl.showPageNumbers(state.tasks, pageNumber);
+    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+  });
+  pagePrev.addEventListener('click', e => {
+    pageNumber -= 1;
+
+    viewCtrl.showPageNumbers(state.tasks, pageNumber);
+    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
   });
 })(viewController, modelController);

@@ -18,6 +18,7 @@ const removeCompleted = (state, id, tag) => {
 
       // Remove tasks from tasks list array
       state.tasks.splice(i, 1);
+      state.important.splice(i, 1);
 
       // Clear detail section
       document.querySelector('.detail').innerHTML = '';
@@ -62,11 +63,28 @@ const searchTask = (state, value, renderTasks) => {
   renderTasks(filteredArr);
 };
 
+const pageCtrl = (tasks, renderTasks, pageNumber, show) => {
+  const taskNumber = 6;
+  const start = (pageNumber - 1) * taskNumber;
+  const end = pageNumber * taskNumber;
+
+  const newTaskList = tasks.slice(start, end);
+
+  newTaskList.forEach(task => {
+    if (newTaskList.indexOf(task) >= pageNumber * taskNumber) {
+      pageNumber += 1;
+    } else {
+      renderTasks(newTaskList, show);
+    }
+  });
+};
+
 const modelController = (() => ({
   sortTasksByDate,
   removeCompleted,
   toggleImportant,
   searchTask,
+  pageCtrl,
 }))();
 
 export default modelController;

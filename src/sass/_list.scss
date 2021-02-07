@@ -1,5 +1,6 @@
 .list {
   border-right: $outline;
+  position: relative;
 
   &__header {
     padding: 1rem 2rem;
@@ -11,6 +12,8 @@
   &__content {
     display: flex;
     flex-direction: column;
+
+    height: 90%;
   }
   &__item {
     padding: 1.5rem 2rem;
@@ -107,4 +110,24 @@
 
 #black {
   fill: $color-grey-dark;
+}
+
+.page {
+  position: absolute;
+  bottom: 1rem;
+  right: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-column-gap: 2rem;
+
+  & > a {
+    display: none;
+    cursor: pointer;
+
+    color: $color-primary;
+
+    &:hover {
+      color: #000;
+    }
+  }
 }
