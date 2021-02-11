@@ -19,15 +19,35 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     pagePrev,
   } = viewCtrl.DOM;
 
-  const state = {
+  let state = {
     tasks: [],
     tags: {},
     completed: [],
     important: [],
   };
 
+  // STORAGE
+  const persistData = () => {
+    localStorage.setItem('state', JSON.stringify(state));
+  };
+
   let pageNumber = 1;
 
+  window.addEventListener('load', e => {
+    if (!JSON.parse(localStorage.getItem('state'))) {
+      persistData();
+    } else {
+      state = JSON.parse(localStorage.getItem('state'));
+    }
+    pageNumber = 1;
+    viewCtrl.showPageNumbers(state.tasks, pageNumber);
+    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+
+    // RENDER TAGS
+    if (state.tags) {
+      viewCtrl.renderTags(state);
+    }
+  });
   class Task {
     constructor({
       taskTitle,
@@ -72,6 +92,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
     // RENDER TAGS
     viewCtrl.renderTags(state);
+
+    /////////////////////////////////////////////
+    persistData();
   });
 
   // TASK LIST EVENT LISTENER (EVENT BUBBLING)
@@ -101,6 +124,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
       // RENDER TAGS
       viewCtrl.renderTags(state);
+
+      /////////////////////////////////////////////
+      persistData();
     }
 
     // STAR ICON EVENT
@@ -113,6 +139,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       viewCtrl.showPageNumbers(state.tasks, pageNumber);
       // viewCtrl.renderTask(state.tasks);
       modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+
+      /////////////////////////////////////////////
+      persistData();
     }
   });
 
@@ -131,6 +160,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     viewCtrl.showPageNumbers(state.tasks, pageNumber);
     // viewCtrl.renderTask(state.tasks);
     modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+
+    /////////////////////////////////////////////
+    persistData();
   });
 
   // SIDEBAR DONE EVENT LISTENER

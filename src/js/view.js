@@ -244,27 +244,29 @@ const renderToday = state => {
   // RENAME TASK LIST HEADER
   DOM.taskListHeaderText.textContent = 'Today';
 
-  state.tasks.forEach(task => {
-    if (task.taskDueDate.toDateString() === today) {
-      newHTML = taskHTML;
+  if (state.tasks) {
+    state.tasks.forEach(task => {
+      if (task.taskDueDate.toDateString() === today) {
+        newHTML = taskHTML;
 
-      if (task.important === 'yes') {
-        newHTML = newHTML.replace('%%STARICON%%', 'red');
-      } else {
-        newHTML = newHTML.replace('%%STARICON%%', 'black');
+        if (task.important === 'yes') {
+          newHTML = newHTML.replace('%%STARICON%%', 'red');
+        } else {
+          newHTML = newHTML.replace('%%STARICON%%', 'black');
+        }
+
+        // REPLACE PLACEHOLDER WITH ACTUAL DATA
+        newHTML = newHTML.replace('%%SHOW%%', 'hide');
+        newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
+        newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
+        newHTML = newHTML.replace('%%ID%%', task.id);
+        newHTML = newHTML.replace('%%TAG%%', task.taskTag);
+
+        // UPDATE TASK LIST
+        DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
       }
-
-      // REPLACE PLACEHOLDER WITH ACTUAL DATA
-      newHTML = newHTML.replace('%%SHOW%%', 'hide');
-      newHTML = newHTML.replace('%%TITLE%%', task.taskTitle);
-      newHTML = newHTML.replace('%%DUEDATE%%', task.formattedDueDate);
-      newHTML = newHTML.replace('%%ID%%', task.id);
-      newHTML = newHTML.replace('%%TAG%%', task.taskTag);
-
-      // UPDATE TASK LIST
-      DOM.taskList.insertAdjacentHTML('beforeend', newHTML);
-    }
-  });
+    });
+  }
 };
 
 const showPageNumbers = (tasks, pageNumber) => {
