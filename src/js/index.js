@@ -39,6 +39,9 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     } else {
       state = JSON.parse(localStorage.getItem('state'));
     }
+
+    modelCtrl.sortTasksByDate(state.tasks);
+
     pageNumber = 1;
     viewCtrl.showPageNumbers(state.tasks, pageNumber);
     modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);

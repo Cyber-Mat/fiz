@@ -7,6 +7,7 @@ const sortFunction = (a, b) => {
 const sortTasksByDate = tasks => {
   // SORT TASKS BASED ON DUE DATE
   tasks.sort(sortFunction);
+  console.log(tasks);
 };
 
 const removeCompleted = (state, id, tag) => {

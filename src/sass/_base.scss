@@ -5,16 +5,25 @@
   margin: 0;
   box-sizing: inherit;
 }
+
 html {
   font-size: 62.5%;
-  font-size: 75%;
-  // font-size: 81.25%;
+
+  @media only screen and (max-width: $bp-large) {
+    font-size: 56.25%;
+  }
+  @media only screen and (max-width: $bp-medium) {
+    font-size: 50%;
+  }
+  @media only screen and (max-width: 50em) {
+    font-size: 43.75%;
+  }
 }
 
 body {
   box-sizing: border-box;
   font-family: $font-primary;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 300;
   line-height: 1.6;
   color: $color-grey-dark;

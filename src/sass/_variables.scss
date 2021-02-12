@@ -26,5 +26,8 @@ $outline-light-2: 1px rgba($color-secondary-6, 1) solid;
 $shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 $shadow-light: 0 0.5rem 1rem rgba(#333, 0.1);
 
-//#5f6368
-//#202124
+//RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; // 1200px
+$bp-large: 62.5em; // 1000px
+$bp-medium: 56.25em; // 900px;
+$bp-small: 37.5em; // 600px;
