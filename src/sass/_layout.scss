@@ -24,6 +24,10 @@ body {
   @media only screen and (max-width: $bp-large) {
     grid-template-columns: 22% 78%;
   }
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 }
 
 .main {
@@ -47,4 +51,17 @@ body {
   grid-column: 1/2;
   height: 100%;
   width: 100%;
+}
+
+.warning {
+  display: none;
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    position: fixed;
+    padding: 10rem;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 }
