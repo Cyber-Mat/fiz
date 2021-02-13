@@ -41,7 +41,9 @@ export const detailHTML = `
                 <span>%%DETAILTITLE%%</span>
                 <div class="icon-div">
                   <svg class="icon">
-                    <use xlink:href="./img/sprite.svg#icon-star-o"></use>
+                    <use
+                      xlink:href="./img/sprite.svg#icon-dots-horizontal-triple"
+                    ></use>
                   </svg>
                   <!--
                   <svg class="icon">
