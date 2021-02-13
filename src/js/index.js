@@ -53,6 +53,10 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     if (state.tags) {
       viewCtrl.renderTags(state);
     }
+
+    document.querySelector(
+      '.loadingio-spinner-wedges-cqyhjjq8b24'
+    ).style.display = 'none';
   });
   class Task {
     constructor({
@@ -270,4 +274,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     viewCtrl.showPageNumbers(tasks, pageNumber);
     modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber, show);
   });
+
+  // PAGE LOAD
+  window.addEventListener('onload', e => {});
 })(viewController, modelController);
