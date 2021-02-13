@@ -23,8 +23,9 @@ export const taskHTML = `
                 </div>
               </div>
               <svg id="%%STARICON%%" class="icon star-icon">
-                <use xlink:href="./img/sprite.svg#icon-star-o"></use>
+              <use xlink:href="./img/sprite.svg#icon-star-o"></use>
               </svg>
+              <span class="delete">x</span>
             </div>`;
 
 export const detailHTML = `  

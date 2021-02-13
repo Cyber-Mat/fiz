@@ -24,6 +24,7 @@ const DOM = {
   searchInput: document.querySelector('.search__input'),
   pageNext: document.querySelector('.page__next'),
   pagePrev: document.querySelector('.page__prev'),
+  deleteBtn: document.querySelector('.delete'),
 };
 
 const popupOpen = () => {
@@ -226,13 +227,19 @@ const renderTaskByTags = (tags, id, sortTasks) => {
   }
 };
 
-const changeHeader = title => {
+const changeHeader = (title, tasks, state) => {
+  if (tasks && tasks) {
+    if (tasks === state.tasks) {
+      title = 'All';
+    } else if (tasks === state.important) {
+      title = 'Important';
+    } else if (tasks === state.completed) {
+      title = 'Completed';
+    }
+  }
+
   DOM.taskListHeaderText.textContent = title;
 };
-
-// const toggleFill = icon => {
-//   icon.id === 'black' ? (icon.id = 'red') : (icon.id = 'black');
-// };
 
 const renderToday = state => {
   let newHTML;
@@ -279,6 +286,9 @@ const showPageNumbers = (tasks, pageNumber) => {
     DOM.pageNext.style.display = 'block';
   } else if (pages === pageNumber && pages > 1) {
     DOM.pagePrev.style.display = 'block';
+    DOM.pageNext.style.display = 'none';
+  } else {
+    DOM.pagePrev.style.display = 'none';
     DOM.pageNext.style.display = 'none';
   }
 };

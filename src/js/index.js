@@ -17,6 +17,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     searchInput,
     pageNext,
     pagePrev,
+    deleteBtn,
   } = viewCtrl.DOM;
 
   let state = {
@@ -32,6 +33,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   };
 
   let pageNumber = 1;
+  let tasks;
 
   window.addEventListener('load', e => {
     if (!JSON.parse(localStorage.getItem('state'))) {
@@ -43,6 +45,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     modelCtrl.sortTasksByDate(state.tasks);
 
     pageNumber = 1;
+    tasks = state.tasks;
     viewCtrl.showPageNumbers(state.tasks, pageNumber);
     modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
 
@@ -87,6 +90,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     // UPDATE TASK LIST WITH NEW TASK
     // viewCtrl.renderTask(state.tasks);
     pageNumber = 1;
+    tasks = state.tasks;
     viewCtrl.showPageNumbers(state.tasks, pageNumber);
     modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
 
@@ -121,15 +125,21 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
       // RENDER NEW TASK LIST
       // viewCtrl.renderTask(state.tasks);
+
+      modelCtrl.sortTasksByDate(state.tasks);
+
       pageNumber = 1;
-      viewCtrl.showPageNumbers(state.tasks, pageNumber);
-      modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+      viewCtrl.showPageNumbers(tasks, pageNumber);
+      modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber);
+
+      viewCtrl.changeHeader('', tasks, state);
 
       // RENDER TAGS
       viewCtrl.renderTags(state);
 
       /////////////////////////////////////////////
       persistData();
+      changeHeader;
     }
 
     // STAR ICON EVENT
@@ -138,10 +148,36 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
       modelCtrl.toggleImportant(state, id);
 
+      modelCtrl.sortTasksByDate(state.tasks);
+
       pageNumber = 1;
-      viewCtrl.showPageNumbers(state.tasks, pageNumber);
-      // viewCtrl.renderTask(state.tasks);
-      modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+      viewCtrl.showPageNumbers(tasks, pageNumber);
+      modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber);
+
+      viewCtrl.changeHeader('', tasks, state);
+
+      /////////////////////////////////////////////
+      persistData();
+    }
+
+    // DELETE BUTTON EVENT
+    if (className === 'delete') {
+      const id = e.target.parentNode.getAttribute('data-id');
+      const tag = e.target.parentNode.getAttribute('data-tag');
+
+      modelCtrl.deleteTask(state, id, tag);
+
+      modelCtrl.sortTasksByDate(state.tasks);
+
+      pageNumber = 1;
+
+      viewCtrl.showPageNumbers(tasks, pageNumber);
+      modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber);
+
+      viewCtrl.changeHeader('', tasks, state);
+
+      // RENDER TAGS
+      viewCtrl.renderTags(state);
 
       /////////////////////////////////////////////
       persistData();
@@ -159,7 +195,10 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
   // SIDEBAR OVERVIEW EVENT LISTENER
   sidebarOverview.addEventListener('click', e => {
+    modelCtrl.sortTasksByDate(state.tasks);
+
     pageNumber = 1;
+    tasks = state.tasks;
     viewCtrl.showPageNumbers(state.tasks, pageNumber);
     // viewCtrl.renderTask(state.tasks);
     modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
@@ -170,7 +209,10 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
 
   // SIDEBAR DONE EVENT LISTENER
   sidebarDone.addEventListener('click', e => {
+    modelCtrl.sortTasksByDate(state.completed);
+
     pageNumber = 1;
+    tasks = state.completed;
     viewCtrl.showPageNumbers(state.completed, pageNumber);
     // viewCtrl.renderTask(state.completed, 'show');
     modelCtrl.pageCtrl(
@@ -179,7 +221,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
       pageNumber,
       'show'
     );
-    viewCtrl.changeHeader('Done');
+    viewCtrl.changeHeader('Completed');
   });
 
   // SIDEBAR IMPORTANT EVENT LISTENER
@@ -187,6 +229,7 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
     modelCtrl.sortTasksByDate(state.important);
 
     pageNumber = 1;
+    tasks = state.important;
     viewCtrl.showPageNumbers(state.important, pageNumber);
     // viewCtrl.renderTask(state.important);
     modelCtrl.pageCtrl(state.important, viewCtrl.renderTask, pageNumber);
@@ -207,14 +250,24 @@ const appCtrl = ((viewCtrl, modelCtrl) => {
   // PAGES
   pageNext.addEventListener('click', e => {
     pageNumber += 1;
+    let show = '';
 
-    viewCtrl.showPageNumbers(state.tasks, pageNumber);
-    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+    if (tasks === state.completed) {
+      show = 'show';
+    }
+
+    viewCtrl.showPageNumbers(tasks, pageNumber);
+    modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber, show);
   });
   pagePrev.addEventListener('click', e => {
     pageNumber -= 1;
+    let show = '';
 
-    viewCtrl.showPageNumbers(state.tasks, pageNumber);
-    modelCtrl.pageCtrl(state.tasks, viewCtrl.renderTask, pageNumber);
+    if (tasks === state.completed) {
+      show = 'show';
+    }
+
+    viewCtrl.showPageNumbers(tasks, pageNumber);
+    modelCtrl.pageCtrl(tasks, viewCtrl.renderTask, pageNumber, show);
   });
 })(viewController, modelController);

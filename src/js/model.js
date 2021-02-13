@@ -7,7 +7,6 @@ const sortFunction = (a, b) => {
 const sortTasksByDate = tasks => {
   // SORT TASKS BASED ON DUE DATE
   tasks.sort(sortFunction);
-  console.log(tasks);
 };
 
 const removeCompleted = (state, id, tag) => {
@@ -81,12 +80,41 @@ const pageCtrl = (tasks, renderTasks, pageNumber, show) => {
   renderTasks(newTaskList, show);
 };
 
+const loopDelete = (arr, id) => {
+  arr.forEach((c, i, a) => {
+    if (c.id === id) {
+      a.splice(i, 1);
+    }
+  });
+};
+
+const deleteTask = (state, id, tag) => {
+  // LOOP THROUGH ALL TASKS AND REMOVE COMPLETED
+  loopDelete(state.tasks, id);
+
+  loopDelete(state.important, id);
+
+  loopDelete(state.completed, id);
+
+  // Clear detail section
+  document.querySelector('.detail').innerHTML = '';
+
+  // LOOP THROUGH TAGS AND REMOVE COMPLETED
+  state.tags[tag].forEach((task, i) => {
+    if (task.id === id) {
+      // Remove tasks from tags
+      state.tags[tag].splice(i, 1);
+    }
+  });
+};
+
 const modelController = (() => ({
   sortTasksByDate,
   removeCompleted,
   toggleImportant,
   searchTask,
   pageCtrl,
+  deleteTask,
 }))();
 
 export default modelController;

@@ -20,7 +20,7 @@
     border-bottom: $outline-light;
 
     display: grid;
-    grid-template-columns: 2rem 1fr 1rem;
+    grid-template-columns: 2rem 1fr 1rem 1rem;
     align-items: center;
 
     position: relative;
@@ -41,6 +41,14 @@
       //   fill: $color-primary;
       position: relative;
       z-index: 10000;
+    }
+
+    .delete {
+      position: relative;
+      z-index: 10000;
+      margin-left: 1rem;
+
+      color: $color-grey-dark;
     }
 
     &--description {
